@@ -73,7 +73,7 @@ const contactForm = document.querySelector("#contact-form");
 const gmailFallback = document.querySelector("#gmail-fallback");
 const formStatus = document.querySelector("#form-status");
 
-const contactEmail = "INSERISCI-EMAIL@ESEMPIO.IT";
+const contactEmail = "gabrielladandretta@icloud.com";
 
 
 if (contactForm) {
