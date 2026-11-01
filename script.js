@@ -182,3 +182,90 @@ Inviato tramite il portfolio di Gabriella D'Andretta.
     });
 
 }
+
+/* =========================================
+   PROJECT VIDEO MODAL
+========================================= */
+
+const projectCards = document.querySelectorAll("[data-project]");
+
+const projectDialog = document.querySelector("#project-dialog");
+const projectDialogVideo = document.querySelector("#project-dialog-video");
+
+const projectDialogTitle = document.querySelector("#project-dialog-title");
+const projectDialogCategory = document.querySelector("#project-dialog-category");
+
+const closeProjectButton = document.querySelector("[data-close-project]");
+
+
+if (projectDialog && projectDialogVideo) {
+
+    // Apertura della modal
+    projectCards.forEach((card) => {
+
+        card.addEventListener("click", () => {
+
+            const videoPath = card.dataset.video;
+            const title = card.dataset.title;
+            const category = card.dataset.category;
+
+            if (!videoPath) return;
+
+            // Aggiorna le informazioni
+            projectDialogTitle.textContent = title || "Progetto";
+            projectDialogCategory.textContent = category || "VIDEO PROJECT";
+
+            // Imposta il video selezionato
+            projectDialogVideo.src = videoPath;
+
+            // Mostra la finestra
+            projectDialog.showModal();
+
+            // Carica e avvia il video
+            projectDialogVideo.load();
+
+            const playPromise = projectDialogVideo.play();
+
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // Se il browser blocca l'autoplay,
+                    // l'utente può avviare il video dai controlli.
+                });
+            }
+
+        });
+
+    });
+
+
+    // Chiusura tramite pulsante
+    if (closeProjectButton) {
+
+        closeProjectButton.addEventListener("click", () => {
+            projectDialog.close();
+        });
+
+    }
+
+
+    // Chiusura cliccando sullo sfondo
+    projectDialog.addEventListener("click", (event) => {
+
+        if (event.target === projectDialog) {
+            projectDialog.close();
+        }
+
+    });
+
+
+    // Pulizia quando la modal viene chiusa
+    projectDialog.addEventListener("close", () => {
+
+        projectDialogVideo.pause();
+
+        projectDialogVideo.removeAttribute("src");
+        projectDialogVideo.load();
+
+    });
+
+}

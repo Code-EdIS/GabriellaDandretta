@@ -1695,3 +1695,322 @@ main,
     }
 
 }
+
+/* =========================================
+   PROJECT CARDS
+========================================= */
+
+/* Reset dei button usati come card */
+
+.project-card {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.project-card:focus-visible {
+    outline: 2px solid var(--orange, #D95D2B);
+    outline-offset: 8px;
+}
+
+.project-image {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.project-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        180deg,
+        rgba(33, 28, 25, 0.05),
+        rgba(33, 28, 25, 0.2)
+    );
+    pointer-events: none;
+}
+
+.cover-art {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: transform 0.7s cubic-bezier(.2, .7, .2, 1);
+}
+
+.project-card:hover .cover-art {
+    transform: scale(1.045);
+}
+
+.cover-index,
+.cover-caption,
+.cover-word,
+.cover-symbol {
+    position: absolute;
+    z-index: 2;
+    font-family: "Syne", sans-serif;
+}
+
+.cover-index {
+    top: 24px;
+    left: 25px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.cover-word {
+    font-size: clamp(45px, 7vw, 105px);
+    font-weight: 800;
+    line-height: 0.85;
+    letter-spacing: -0.08em;
+}
+
+.cover-symbol {
+    font-size: clamp(65px, 10vw, 145px);
+    line-height: 1;
+    opacity: 0.9;
+}
+
+.cover-caption {
+    bottom: 26px;
+    left: 26px;
+    font-family: "DM Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+}
+
+.project-number {
+    z-index: 3;
+}
+
+.project-open {
+    z-index: 3;
+}
+
+
+/* =========================================
+   COVER 01 — COCOA / ORANGE
+========================================= */
+
+.cover-one {
+    background: #6B3F2A;
+    color: #F5EBDD;
+}
+
+.cover-one .cover-word {
+    transform: rotate(-8deg);
+    color: #D95D2B;
+}
+
+.cover-one .cover-symbol {
+    top: 12%;
+    right: 12%;
+    color: #F5EBDD;
+    font-size: clamp(55px, 8vw, 100px);
+}
+
+
+/* =========================================
+   COVER 02 — PAPER / COCOA
+========================================= */
+
+.cover-two {
+    background: #E5CDB0;
+    color: #211C19;
+}
+
+.cover-two .cover-word {
+    color: #6B3F2A;
+    transform: rotate(5deg);
+}
+
+.cover-two .cover-symbol {
+    right: 12%;
+    bottom: 10%;
+    color: #D95D2B;
+}
+
+
+/* =========================================
+   COVER 03 — ORANGE / INK
+========================================= */
+
+.cover-three {
+    background: #D95D2B;
+    color: #211C19;
+}
+
+.cover-three .cover-word {
+    color: #F5EBDD;
+    transform: rotate(-5deg);
+}
+
+.cover-three .cover-symbol {
+    top: 10%;
+    right: 12%;
+    color: #211C19;
+}
+
+
+/* =========================================
+   COVER 04 — INK / PAPER
+========================================= */
+
+.cover-four {
+    background: #211C19;
+    color: #F5EBDD;
+}
+
+.cover-four .cover-word {
+    color: #D95D2B;
+    transform: rotate(4deg);
+}
+
+.cover-four .cover-symbol {
+    right: 13%;
+    bottom: 12%;
+    color: #E5CDB0;
+}
+
+
+/* =========================================
+   PROJECT MODAL
+========================================= */
+
+.project-dialog {
+    width: min(1100px, calc(100% - 32px));
+    max-width: none;
+    max-height: 90vh;
+    padding: 0;
+    border: 1px solid rgba(245, 235, 221, 0.15);
+    background: #211C19;
+    color: #F5EBDD;
+    overflow: hidden;
+}
+
+.project-dialog[open] {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-dialog::backdrop {
+    background: rgba(20, 16, 14, 0.88);
+    backdrop-filter: blur(8px);
+}
+
+.dialog-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 22px 26px;
+    border-bottom: 1px solid rgba(245, 235, 221, 0.15);
+}
+
+.dialog-top h2 {
+    margin: 5px 0 0;
+    color: #F5EBDD;
+    font-family: "Syne", sans-serif;
+    font-size: clamp(20px, 3vw, 30px);
+    font-weight: 700;
+}
+
+.dialog-eyebrow {
+    margin: 0;
+    color: #D95D2B;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+}
+
+.dialog-close {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    place-items: center;
+    border: 1px solid rgba(245, 235, 221, 0.3);
+    border-radius: 50%;
+    background: transparent;
+    color: #F5EBDD;
+    font-size: 18px;
+    cursor: pointer;
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.dialog-close:hover {
+    border-color: #D95D2B;
+    background: #D95D2B;
+    color: #211C19;
+}
+
+.project-dialog-content {
+    display: grid;
+    min-height: 200px;
+    max-height: calc(90vh - 100px);
+    place-items: center;
+    padding: 20px;
+    background: #151210;
+}
+
+.project-dialog-content video {
+    display: block;
+    width: 100%;
+    max-height: calc(90vh - 150px);
+    object-fit: contain;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 760px) {
+
+    .project-dialog {
+        width: calc(100% - 20px);
+        max-height: 94vh;
+    }
+
+    .dialog-top {
+        padding: 16px;
+    }
+
+    .project-dialog-content {
+        padding: 10px;
+        max-height: calc(94vh - 85px);
+    }
+
+    .project-dialog-content video {
+        max-height: calc(94vh - 110px);
+    }
+
+    .cover-index {
+        top: 16px;
+        left: 16px;
+        font-size: 9px;
+    }
+
+    .cover-caption {
+        bottom: 17px;
+        left: 16px;
+        font-size: 8px;
+    }
+
+}
